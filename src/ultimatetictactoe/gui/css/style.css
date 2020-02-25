@@ -1,0 +1,23 @@
+
+
+
+
+
+.button{
+    -fx-padding: 10px 20px;
+    -fx-display: block;
+    -fx-text-align: center;
+    -fx-font-size: 15px;
+
+
+}
+
+.microGridPanes{
+    -fx-border-color: blue;
+    -fx-padding: 15px;
+    -fx-margin: 15px;
+    -fx-align-items: center;
+    -fx-background-color: lightgrey;
+    
+
+}

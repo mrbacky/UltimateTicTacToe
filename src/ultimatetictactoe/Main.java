@@ -16,11 +16,10 @@ import javafx.stage.Stage;
  * @author Sammy Guergachi <sguergachi at gmail.com>
  */
 public class Main extends Application {
-    //	commentaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-    //	comment again!!
+    
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("Main.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/ultimatetictactoe/gui/view/Main.fxml"));
         
         Scene scene = new Scene(root);
         
