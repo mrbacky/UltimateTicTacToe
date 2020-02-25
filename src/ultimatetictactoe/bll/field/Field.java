@@ -56,7 +56,7 @@ public class Field implements IField{
 
     @Override
     public void setMacroboard(String[][] macroboard) {
-      this.macroboard=board;
+      this.macroboard=macroboard;
     }
 
 }
