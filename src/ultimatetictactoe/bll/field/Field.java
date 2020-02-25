@@ -7,7 +7,7 @@ import ultimatetictactoe.bll.move.IMove;
 
 public class Field implements IField{
     private String board[][] = new String[3][3];
-    private String macroboard[][] = new String[3][3];
+    private String macroboard[][] = new String[9][9];
 
     @Override
     public void clearBoard() {
