@@ -6,6 +6,8 @@ import ultimatetictactoe.bll.move.IMove;
 
 
 public class Field implements IField{
+    private String board[][] = new String[3][3];
+    private String macroboard[][] = new String[3][3];
 
     @Override
     public void clearBoard() {
@@ -39,22 +41,22 @@ public class Field implements IField{
 
     @Override
     public String[][] getBoard() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return board;
     }
 
     @Override
     public String[][] getMacroboard() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            return macroboard;
     }
 
     @Override
     public void setBoard(String[][] board) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+     this.board=board;  
     }
 
     @Override
     public void setMacroboard(String[][] macroboard) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+      this.macroboard=board;
     }
 
 }
