@@ -1,2 +1,1 @@
-# UltimateTicTacToe
- Compulsory 2
+# ultimateTicTacToeStarter
