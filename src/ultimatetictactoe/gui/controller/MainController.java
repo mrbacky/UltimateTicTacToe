@@ -6,31 +6,67 @@
 package ultimatetictactoe.gui.controller;
 
 import java.net.URL;
+import java.util.Arrays;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import ultimatetictactoe.be.UTTTButton;
+import ultimatetictactoe.bll.game.GameManager;
+import ultimatetictactoe.bll.game.GameState;
+import ultimatetictactoe.bll.game.IGameState;
+import ultimatetictactoe.bll.move.IMove;
+import ultimatetictactoe.bll.move.Move;
 
-/**
- *
- * @author Sammy Guergachi <sguergachi at gmail.com>
- */
 public class MainController implements Initializable {
-    
-    private Label label;
+
+    private GameManager gameManager;
+    private IGameState gameState;
+    private IMove move;
     @FXML
-    private GridPane macroBoard;
-    
-    private void handleButtonAction(ActionEvent event) {
-        System.out.println("You clicked me!");
-        label.setText("Hello World!");
-    }
-    
+    private AnchorPane mainPane;
+    private UTTTButton btn;
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-    }    
-    
+        gameManager = new GameManager(gameState);
+        gameState = new GameState();
+        createTiles();
+
+    }
+
+    private void createTiles() {
+        int btnWidth = 40;
+        int btnHeight = 40;
+        for (int x = 0; x < 9; x++) {
+            for (int y = 0; y < 9; y++) {
+
+                btn.setPrefSize(btnWidth, btnHeight);
+                btn.setMove(new Move(x, y));
+
+                btn.setLayoutX(20 + (btnWidth + 5) * x);
+                btn.setLayoutY(20 + (btnHeight + 5) * y);
+                play();
+                mainPane.getChildren().add(btn);
+            }
+        }
+    }
+
+    private void play() {
+        btn.setOnMouseClicked(ActionEvent -> {
+            UTTTButton b = (UTTTButton) ActionEvent.getSource();
+            boolean isSuccess = gameManager.updateGame(b.getMove());
+            if (isSuccess) {
+                if (gameState.getMoveNumber() % 2 == 0) {
+                    b.setText("X");
+                } else {
+                    b.setText("O");
+                }
+            }
+        });
+
+    }
 }
