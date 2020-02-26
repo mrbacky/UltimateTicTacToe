@@ -5,24 +5,33 @@ import ultimatetictactoe.bll.move.IMove;
 
 public class Field implements IField {
 
-    private String board[][] = new String[9][9];
-    private String macroboard[][] = new String[3][3];
+    private String[][] board;
+    private String[][] macroboard;
 
     public Field() {
+        board = new String[9][9];
+        macroboard = new String[3][3];
         clearBoard();
     }
 
     @Override
     public void clearBoard() {
-        for (int i = 0; i < board.length; i++) {
-            for (int j = 0; j < board[i].length; j++) {
-                board[i][j] = EMPTY_FIELD;
+        clearMacroboard();
+        clearMicroboards();
+    }
+
+    private void clearMacroboard() {
+        for (int i = 0; i < macroboard.length; i++) {
+            for (int k = 0; k < macroboard[i].length; k++) {
+                board[i][k] = AVAILABLE_FIELD;
             }
         }
+    }
 
-        for (int i = 0; i < macroboard.length; i++) {
-            for (int j = 0; j < macroboard[i].length; j++) {
-                macroboard[i][j] = AVAILABLE_FIELD;
+    private void clearMicroboards() {
+        for (int i = 0; i < board.length; i++) {
+            for (int k = 0; k < board[i].length; k++) {
+                board[i][k] = EMPTY_FIELD;
             }
         }
     }
@@ -34,20 +43,19 @@ public class Field implements IField {
 
     @Override
     public String getPlayerId(int column, int row) {
-        String playerID = board[column][row];
-        return playerID;
+        return board[column][row];
     }
 
     @Override
     public boolean isEmpty() {
         for (int i = 0; i < board.length; i++) {
-            for (int j = 0; j < board[i].length; j++) {
-                if (board[i][j].equals(EMPTY_FIELD)) {
-                    return true;
+            for (int k = 0; k < board[i].length; k++) {
+                if (!board[i][k].equals(EMPTY_FIELD)) {
+                    return false;
                 }
             }
         }
-        return false;
+        return true;
     }
 
     @Override
@@ -60,6 +68,14 @@ public class Field implements IField {
             }
         }
         return false;
+        for (int i = 0; i < macroboard.length; i++) {
+            for (int k = 0; k < macroboard[i].length; k++) {
+                if (macroboard[i][k].equals(AVAILABLE_FIELD) || macroboard[i][k].equals(EMPTY_FIELD)) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 
     @Override
