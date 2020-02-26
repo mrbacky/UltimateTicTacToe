@@ -1,17 +1,39 @@
-
 package ultimatetictactoe.bll.field;
 
 import java.util.List;
 import ultimatetictactoe.bll.move.IMove;
 
+public class Field implements IField {
 
-public class Field implements IField{
-    private String board[][] = new String[3][3];
-    private String macroboard[][] = new String[9][9];
+    private String[][] board;
+    private String[][] macroboard;
+
+    public Field() {
+        board = new String[9][9];
+        macroboard = new String[3][3];
+        clearBoard();
+    }
 
     @Override
     public void clearBoard() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        clearMacroboard();
+        clearMicroboards();
+    }
+
+    private void clearMacroboard() {
+        for (int i = 0; i < macroboard.length; i++) {
+            for (int k = 0; k < macroboard[i].length; k++) {
+                board[i][k] = AVAILABLE_FIELD;
+            }
+        }
+    }
+
+    private void clearMicroboards() {
+        for (int i = 0; i < board.length; i++) {
+            for (int k = 0; k < board[i].length; k++) {
+                board[i][k] = EMPTY_FIELD;
+            }
+        }
     }
 
     @Override
@@ -21,17 +43,39 @@ public class Field implements IField{
 
     @Override
     public String getPlayerId(int column, int row) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return board[column][row];
     }
 
     @Override
     public boolean isEmpty() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        for (int i = 0; i < board.length; i++) {
+            for (int k = 0; k < board[i].length; k++) {
+                if (!board[i][k].equals(EMPTY_FIELD)) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 
     @Override
     public boolean isFull() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        for (int i = 0; i < board.length; i++) {
+            for (int j = 0; j < board[i].length; j++) {
+                if (!board[i][j].equals(EMPTY_FIELD)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+        for (int i = 0; i < macroboard.length; i++) {
+            for (int k = 0; k < macroboard[i].length; k++) {
+                if (macroboard[i][k].equals(AVAILABLE_FIELD) || macroboard[i][k].equals(EMPTY_FIELD)) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 
     @Override
@@ -46,17 +90,17 @@ public class Field implements IField{
 
     @Override
     public String[][] getMacroboard() {
-            return macroboard;
+        return macroboard;
     }
 
     @Override
     public void setBoard(String[][] board) {
-     this.board=board;  
+        this.board = board;
     }
 
     @Override
     public void setMacroboard(String[][] macroboard) {
-      this.macroboard=macroboard;
+        this.macroboard = macroboard;
     }
 
 }
