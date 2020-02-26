@@ -34,6 +34,7 @@ public class MainController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         gameManager = new GameManager(gameState);
         gameState = new GameState();
+
         createTiles();
 
     }
@@ -44,9 +45,9 @@ public class MainController implements Initializable {
         for (int x = 0; x < 9; x++) {
             for (int y = 0; y < 9; y++) {
 
+                btn = new UTTTButton();
                 btn.setPrefSize(btnWidth, btnHeight);
                 btn.setMove(new Move(x, y));
-
                 btn.setLayoutX(20 + (btnWidth + 5) * x);
                 btn.setLayoutY(20 + (btnHeight + 5) * y);
                 play();
@@ -67,6 +68,5 @@ public class MainController implements Initializable {
                 }
             }
         });
-
     }
 }

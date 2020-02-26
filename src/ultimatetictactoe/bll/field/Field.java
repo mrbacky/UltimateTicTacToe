@@ -68,6 +68,7 @@ public class Field implements IField {
             }
         }
         return false;
+        /*
         for (int i = 0; i < macroboard.length; i++) {
             for (int k = 0; k < macroboard[i].length; k++) {
                 if (macroboard[i][k].equals(AVAILABLE_FIELD) || macroboard[i][k].equals(EMPTY_FIELD)) {
@@ -76,6 +77,7 @@ public class Field implements IField {
             }
         }
         return true;
+         */
     }
 
     @Override
