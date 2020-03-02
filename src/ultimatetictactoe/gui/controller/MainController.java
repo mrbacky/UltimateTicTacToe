@@ -21,54 +21,52 @@ import ultimatetictactoe.bll.game.IGameState;
 import ultimatetictactoe.bll.move.IMove;
 import ultimatetictactoe.bll.move.Move;
 
+
+
+/**
+ *
+ * @author rtlop
+ */
 public class MainController implements Initializable {
 
-    private GameManager gameManager;
-    private IGameState gameState;
-    private IMove move;
+    private GameManager gm;
+    IGameState gameState;
     @FXML
-    private AnchorPane mainPane;
-    private UTTTButton btn;
-    private final int BTN_WIDTH = 40;
-    private final int BTN_HEIGHT = 40;
+    private AnchorPane Mpane;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        gameManager = new GameManager(gameState);
         gameState = new GameState();
-
-        createTiles();
+        gm = new GameManager(gameState);
+        createAllCells();
 
     }
 
-    private void createTiles() {
+    private void createAllCells() {
+        int btnWidth = 30;
+        int btnHeight = 30;
         for (int x = 0; x < 9; x++) {
             for (int y = 0; y < 9; y++) {
-
-                btn = new UTTTButton();
-                btn.setPrefSize(BTN_WIDTH, BTN_HEIGHT);
-
+                UTTTButton btn = new UTTTButton();
                 btn.setMove(new Move(x, y));
-
-                btn.setLayoutX(20 + (BTN_WIDTH + 5) * x);
-                btn.setLayoutY(20 + (BTN_HEIGHT + 5) * y);
-                play();
-                mainPane.getChildren().add(btn);
+                btn.setPrefSize(btnWidth, btnHeight);
+                btn.setLayoutX(30+(btnWidth+10)*x);
+                btn.setLayoutY(30+(btnHeight+10)*y);
+                btn.setOnMouseClicked(event -> {
+                    UTTTButton b = (UTTTButton) event.getSource();
+                    boolean isSucces = gm.updateGame(b.getMove());
+                    if (isSucces) {
+                        if (gameState.getMoveNumber() % 2 == 0) {
+                            b.setText("X");
+                        } else {
+                            b.setText("O");
+                        }
+                    }
+                });
+                Mpane.getChildren().add(btn);
             }
         }
-    }
 
-    private void play() {
-        btn.setOnMouseClicked(ActionEvent -> {
-            UTTTButton b = (UTTTButton) ActionEvent.getSource();
-            boolean isSuccess = gameManager.updateGame(b.getMove());
-            if (isSuccess) {
-                if (gameState.getMoveNumber() % 2 == 0) {
-                    b.setText("X");
-                } else {
-                    b.setText("O");
-                }
-            }
-        });
     }
 }
+
