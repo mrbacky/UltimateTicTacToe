@@ -50,8 +50,8 @@ public class MainController implements Initializable {
                 UTTTButton btn = new UTTTButton();
                 btn.setMove(new Move(x, y));
                 btn.setPrefSize(btnWidth, btnHeight);
-                btn.setLayoutX(30+(btnWidth+10)*x);
-                btn.setLayoutY(30+(btnHeight+10)*y);
+                btn.setLayoutX(10+(btnWidth+10)*x);
+                btn.setLayoutY(10+(btnHeight+10)*y);
                 btn.setOnMouseClicked(event -> {
                     UTTTButton b = (UTTTButton) event.getSource();
                     boolean isSucces = gm.updateGame(b.getMove());
