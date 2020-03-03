@@ -39,6 +39,7 @@ public class MainController implements Initializable {
         gameState = new GameState();
         gm = new GameManager(gameState);
         createAllCells();
+        //Mpane.setPrefSize(600, 600);
 
     }
 

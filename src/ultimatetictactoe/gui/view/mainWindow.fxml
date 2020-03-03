@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 
 
-<AnchorPane id="AnchorPane" fx:id="Mpane" prefHeight="370.0" prefWidth="370.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ultimatetictactoe.gui.controller.MainController">
+<AnchorPane id="AnchorPane" fx:id="Mpane" prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ultimatetictactoe.gui.controller.MainController">
    <children>
       <ImageView fitHeight="370.0" fitWidth="455.0" pickOnBounds="true" preserveRatio="true">
          <image>
