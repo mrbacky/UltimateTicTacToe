@@ -2,16 +2,14 @@ package ultimatetictactoe.bll.move;
 
 public class Move implements IMove {
 
-    private int x;
-    private int y;
+    int x=0;
+    int y=0;
 
     public Move(int x, int y) {
         this.x = x;
         this.y = y;
     }
 
-    
-    
     public int getX() {
         return x;
     }
@@ -26,6 +24,11 @@ public class Move implements IMove {
 
     public void setY(int y) {
         this.y = y;
+    }
+    
+    @Override
+    public String toString() {
+        return "("+x+","+y+")";
     }
 
 }

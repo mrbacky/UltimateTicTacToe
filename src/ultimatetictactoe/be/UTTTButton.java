@@ -14,5 +14,4 @@ public class UTTTButton extends Button {
     public void setMove(IMove move) {
         this.move = move;
     }
-
 }
