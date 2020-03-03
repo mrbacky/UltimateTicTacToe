@@ -30,7 +30,8 @@
         </rowConstraints>
          <children>
             <Label fx:id="lbl_title" text="Ultimate TIC TAC TOE" GridPane.columnSpan="4" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-            <JFXButton text="START GAME" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP" />
+            
+            <JFXButton onAction="#clickStartGame" text="START GAME" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP" />
             <Label text="V" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="2" />
             <Label text="S" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="2" />
             <JFXTextField focusColor="#43eb81" maxWidth="140.0" unFocusColor="#43eb81" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
