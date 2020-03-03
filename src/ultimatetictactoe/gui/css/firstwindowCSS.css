@@ -1,0 +1,29 @@
+
+.root{
+    -fx-background-color: #cc00cc
+}
+
+.button{
+        -fx-padding: 5px;
+    -fx-font-size: 25px;
+}
+
+.label{
+    -fx-font-family: "Arial";
+    -fx-font-size: 30px;
+    -fx-font-weight: bolder;
+    -fx-text-fill: black;
+}
+
+.button:hover{
+    -fx-background-color: greenyellow;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
+    -fx-text-fill: black;
+    -fx-font-weight: bold;
+}
+
+.button{
+    -fx-background-color: lightgreen;
+    -fx-text-fill: black;
+    -fx-font-weight: bold;
+}
