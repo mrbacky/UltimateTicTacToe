@@ -6,19 +6,15 @@
 package ultimatetictactoe.gui.controller;
 
 import java.net.URL;
-import java.util.Arrays;
 import java.util.ResourceBundle;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import ultimatetictactoe.be.UTTTButton;
 import ultimatetictactoe.bll.game.GameManager;
 import ultimatetictactoe.bll.game.GameState;
 import ultimatetictactoe.bll.game.IGameState;
-import ultimatetictactoe.bll.move.IMove;
 import ultimatetictactoe.bll.move.Move;
 
 
@@ -33,26 +29,29 @@ public class MainController implements Initializable {
     IGameState gameState;
     @FXML
     private AnchorPane Mpane;
+    @FXML
+    private GridPane Gpane;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         gameState = new GameState();
         gm = new GameManager(gameState);
         createAllCells();
-        //Mpane.setPrefSize(600, 600);
+        Mpane.setId("Mpane");
+        Gpane.setId("Gpane");
 
     }
 
     private void createAllCells() {
-        int btnWidth = 30;
-        int btnHeight = 30;
+        int btnWidth = 75;
+        int btnHeight = 75;
         for (int x = 0; x < 9; x++) {
             for (int y = 0; y < 9; y++) {
                 UTTTButton btn = new UTTTButton();
                 btn.setMove(new Move(x, y));
                 btn.setPrefSize(btnWidth, btnHeight);
-                btn.setLayoutX(10+(btnWidth+10)*x);
-                btn.setLayoutY(10+(btnHeight+10)*y);
+                btn.setLayoutX(20+(btnWidth+10)*x);
+                btn.setLayoutY(20+(btnHeight+10)*y);
                 btn.setOnMouseClicked(event -> {
                     UTTTButton b = (UTTTButton) event.getSource();
                     boolean isSucces = gm.updateGame(b.getMove());
@@ -67,7 +66,6 @@ public class MainController implements Initializable {
                 Mpane.getChildren().add(btn);
             }
         }
-
     }
 }
 

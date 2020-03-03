@@ -1,0 +1,27 @@
+
+#Mpane{
+    -fx-border-color: purple;
+    -fx-align-items: center;
+    -fx-background-color: lightgreen;    
+}
+
+#Gpane{
+
+}
+
+.button{   
+    -fx-border-color: purple;
+    -fx-text-align: center;
+    -fx-font-size: 30px;
+    -fx-border-width: 2;
+    -fx-background-color:
+        linear-gradient(#f2f2f2, #d6d6d6),
+        linear-gradient(#fcfcfc 0%, #d9d9d9 20%, #d6d6d6 100%),
+        linear-gradient(#dddddd 0%, #f6f6f6 50%);
+     -fx-cursor: hand;
+}
+
+.button:hover{
+    -fx-background-color: #FFF379;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
+}
