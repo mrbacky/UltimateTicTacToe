@@ -12,6 +12,10 @@ import com.jfoenix.controls.JFXTextField;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -24,6 +28,8 @@ import javafx.scene.control.ToggleGroup;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import ultimatetictactoe.bll.bot.IBot;
+import ultimatetictactoe.dal.DynamicBotClassHandler;
+import static ultimatetictactoe.dal.DynamicBotClassHandler.loadBotList;
 
 /**
  * FXML Controller class
@@ -62,7 +68,33 @@ public class FirstWindowController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+      
+        ObservableList<IBot> bots = FXCollections.observableArrayList();
+        try {
+            DynamicBotClassHandler.writeBotsToTextFile();
+            bots = loadBotList();
+        } catch (IOException | ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
+            Logger.getLogger(FirstWindowController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        comboBotsLeft.setButtonCell(new CustomIBotListCell());
+        comboBotsLeft.setCellFactory(p -> new CustomIBotListCell());
+        comboBotsLeft.setItems(bots);
+        comboBotsRight.setButtonCell(new CustomIBotListCell());
+        comboBotsRight.setCellFactory(p -> new CustomIBotListCell());
+        comboBotsRight.setItems(bots);
+        btnStart.setDisableVisualFocus(true);
+
+        radioLeftAI.selectedProperty().addListener((observable, oldValue, newValue) -> comboBotsLeft.setDisable(!newValue));
+        radioLeftHuman.selectedProperty().addListener((observable, oldValue, newValue) -> txtHumanNameLeft.setDisable(!newValue));
+        radioRightAI.selectedProperty().addListener((observable, oldValue, newValue) -> comboBotsRight.setDisable(!newValue));
+        radioRightHuman.selectedProperty().addListener((observable, oldValue, newValue) -> txtHumanNameRight.setDisable(!newValue));
+        comboBotsLeft.getSelectionModel().selectFirst();
+        comboBotsLeft.setDisable(true);
+        comboBotsRight.getSelectionModel().selectFirst();
+        comboBotsRight.setDisable(true);
+        
+    
     }
 
     @FXML
