@@ -33,12 +33,12 @@ public class DynamicBotClassHandler {
         File file = new File("bots.txt");
         List<String> bots = new ArrayList<>();
 
-        Path dir = FileSystems.getDefault().getPath("./src/ultimatetictactoe/bll/bot");
+        Path dir = FileSystems.getDefault().getPath("./src/dk/easv/bll/bot");
         try (DirectoryStream<Path> stream = 
                 Files.newDirectoryStream(dir, "*.java")) {
             for (Path path : stream){
                 String className = getFilenameNoExtension(path);
-                String classPathAndName = "ultimatetictactoe.bll.bot." + className;
+                String classPathAndName = "dk.easv.bll.bot." + className;
                 URL[] urls = {path.toFile().toURI().toURL()};
                 ClassLoader cl = new URLClassLoader(urls);
                 Class clazz = cl.loadClass(classPathAndName);
@@ -58,10 +58,10 @@ public class DynamicBotClassHandler {
     {
         ObservableList<IBot> bots = FXCollections.observableArrayList();
 
-        Path dir = FileSystems.getDefault().getPath("./src/ultimatetictactoe/bll/bot");
+        Path dir = FileSystems.getDefault().getPath("./src/dk/easv/bll/bot");
         try (DirectoryStream<Path> stream = Files.newDirectoryStream(dir, "*.java")) {
             for (Path path : stream) {
-                String classPathAndName = "ultimatetictactoe.bll.bot." + getFilenameNoExtension(path);
+                String classPathAndName = "dk.easv.bll.bot." + getFilenameNoExtension(path);
                 URL[] urls = {path.toFile().toURI().toURL()};
                 ClassLoader cl = new URLClassLoader(urls);
                 Class clazz = cl.loadClass(classPathAndName);

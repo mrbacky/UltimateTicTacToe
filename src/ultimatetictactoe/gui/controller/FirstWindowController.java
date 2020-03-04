@@ -107,7 +107,7 @@ public class FirstWindowController implements Initializable {
 
         Stage primaryStage = new Stage();
         primaryStage.initModality(Modality.WINDOW_MODAL);
-        FXMLLoader fxLoader = new FXMLLoader(getClass().getResource("/ultimatetictactoe/gui/view/mainWindow.fxml"));
+        FXMLLoader fxLoader = new FXMLLoader(getClass().getResource("/ultimatetictactoe/gui/view/FirstWindow.fxml"));
         Parent root = fxLoader.load();
 
         MainController controller = ((MainController) fxLoader.getController());
