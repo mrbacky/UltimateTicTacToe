@@ -10,11 +10,12 @@ import ultimatetictactoe.bll.move.IMove;
 public interface IBot {
 
     /**
-     * Makes a turn. Implement this method to make your bot do something.
+     * Makes a turn. Implement this method to make your dk.easv.bll.bot do something.
      *
-     * @param state the current game state
+     * @param state the current dk.easv.bll.game state
      * @return The column where the turn was made.
      */
     IMove doMove(IGameState state);
-    
+
+    String getBotName();
 }
