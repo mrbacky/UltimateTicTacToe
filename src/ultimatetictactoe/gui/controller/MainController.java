@@ -5,7 +5,6 @@
  */
 package ultimatetictactoe.gui.controller;
 
-
 import com.jfoenix.controls.JFXButton;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -21,6 +20,7 @@ import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.RowConstraints;
+import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
 import ultimatetictactoe.be.UTTTButton;
 import ultimatetictactoe.bll.bot.IBot;
@@ -35,10 +35,6 @@ public class MainController implements Initializable {
 
     private GameManager gm;
     IGameState gameState;
-    @FXML
-    private AnchorPane Mpane;
-    @FXML
-    private GridPane Gpane;
 
     private final GridPane[][] gridMicros = new GridPane[3][3];
     private final JFXButton[][] jfxButtons = new JFXButton[9][9];
@@ -48,17 +44,23 @@ public class MainController implements Initializable {
     IBot bot1 = null;
     String player0 = null;
     String player1 = null;
-    private boolean simulation;
 
+    @FXML
+    private AnchorPane paneMacro;
     private long botDelay = 500;
+    @FXML
+    private StackPane stackMain;
+    @FXML
+    private AnchorPane paneWinner;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         gameState = new GameState();
         gm = new GameManager(gameState);
+        paneMacro.toFront();
         createAllCells();
-        Mpane.setId("Mpane");
-        Gpane.setId("Gpane");
+        stackMain.setId("stackMain");
+        paneWinner.setId("paneWinner");
     }
 
     public void startGame() {
@@ -124,7 +126,7 @@ public class MainController implements Initializable {
                         }
                     }
                 });
-                Mpane.getChildren().add(btn);
+                paneMacro.getChildren().add(btn);
             }
         }
     }
@@ -157,8 +159,8 @@ public class MainController implements Initializable {
         //updateConsole();
         Platform.runLater(() -> updateGUI());
     }
-    
-            private void checkAndLockIfGameEnd(int currentPlayer) {
+
+    private void checkAndLockIfGameEnd(int currentPlayer) {
         if (model.getGameOverState() != GameManager.GameOverState.Active) {
             String[][] macroboard = model.getMacroboard();
             // Lock game
@@ -184,8 +186,7 @@ public class MainController implements Initializable {
             for (int k = 0; k < board[i].length; k++) {
                 if (board[i][k].equals(IField.EMPTY_FIELD)) {
                     jfxButtons[i][k].getStyleClass().add("empty");
-                }
-                else {
+                } else {
                     jfxButtons[i][k].getStyleClass().add("player" + board[i][k]);
                 }
 
@@ -198,8 +199,7 @@ public class MainController implements Initializable {
                     // Highlight available plays
                     if (macroBoard[i][k].equals(IField.AVAILABLE_FIELD)) {
                         gridMicros[i][k].getStyleClass().add("highlight");
-                    }
-                    else {
+                    } else {
                         gridMicros[i][k].getStyleClass().removeAll("highlight");
                     }
 
@@ -214,17 +214,16 @@ public class MainController implements Initializable {
         }
 
     }
-    
-        private void setMacroWinner(int x, int y) {
+
+    private void setMacroWinner(int x, int y) {
         String[][] macroBoard = model.getMacroboard();
-        Gpane.getChildren().remove(gridMicros[x][y]);
+        paneMacro.getChildren().remove(gridMicros[x][y]);
         Label lbl = new Label("");
         lbl.getStyleClass().add("winner-label");
         lbl.getStyleClass().add("player" + macroBoard[x][y]);
         lbl.setPrefSize(Double.MAX_VALUE, Double.MAX_VALUE);
         gridMicros[x][y] = null;
-        Gpane.add(lbl, x, y);
+        paneMacro.add(lbl, x, y);
     }
-    
-   
+
 }
