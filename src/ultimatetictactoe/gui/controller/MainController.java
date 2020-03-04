@@ -5,7 +5,6 @@
  */
 package ultimatetictactoe.gui.controller;
 
-
 import com.jfoenix.controls.JFXButton;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -22,6 +21,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.text.Text;
+import ultimatetictactoe.GameResult;
 import ultimatetictactoe.be.UTTTButton;
 import ultimatetictactoe.bll.bot.IBot;
 import ultimatetictactoe.bll.field.IField;
@@ -51,6 +51,8 @@ public class MainController implements Initializable {
     private boolean simulation;
 
     private long botDelay = 500;
+    @FXML
+    private Label lblWinner;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -59,6 +61,7 @@ public class MainController implements Initializable {
         createAllCells();
         Mpane.setId("Mpane");
         Gpane.setId("Gpane");
+
     }
 
     public void startGame() {
@@ -104,15 +107,15 @@ public class MainController implements Initializable {
     }
 
     private void createAllCells() {
-        int btnWidth = 75;
-        int btnHeight = 75;
+        int btnWidth = 50;
+        int btnHeight = 50;
         for (int x = 0; x < 9; x++) {
             for (int y = 0; y < 9; y++) {
                 UTTTButton btn = new UTTTButton();
                 btn.setMove(new Move(x, y));
                 btn.setPrefSize(btnWidth, btnHeight);
-                btn.setLayoutX(20 + (btnWidth + 10) * x);
-                btn.setLayoutY(20 + (btnHeight + 10) * y);
+                btn.setLayoutX(20 + (btnWidth + 15) * x);
+                btn.setLayoutY(60 + (btnHeight + 15) * y);
                 btn.setOnMouseClicked(event -> {
                     UTTTButton b = (UTTTButton) event.getSource();
                     boolean isSucces = gm.updateGame(b.getMove());
@@ -157,8 +160,8 @@ public class MainController implements Initializable {
         //updateConsole();
         Platform.runLater(() -> updateGUI());
     }
-    
-            private void checkAndLockIfGameEnd(int currentPlayer) {
+
+    private void checkAndLockIfGameEnd(int currentPlayer) {
         if (model.getGameOverState() != GameManager.GameOverState.Active) {
             String[][] macroboard = model.getMacroboard();
             // Lock game
@@ -169,12 +172,14 @@ public class MainController implements Initializable {
                     }
                 }
             }
-            /*if (model.getGameOverState().equals(GameManager.GameOverState.Tie)) {
-                Platform.runLater(() -> showWinnerPane("TIE"));
+            if (model.getGameOverState().equals(GameManager.GameOverState.Tie)) {
+                lblWinner.setText("It's a TIE !");
+            } else if (currentPlayer == 0) {
+                lblWinner.setText("RED PLAYER IS WINNER !");
+            } else {
+                lblWinner.setText("BLUE PLAYER IS WINNER !");
             }
-            else {
-                Platform.runLater(() -> showWinnerPane(currentPlayer + ""));
-            }*/
+
         }
     }
 
@@ -184,8 +189,7 @@ public class MainController implements Initializable {
             for (int k = 0; k < board[i].length; k++) {
                 if (board[i][k].equals(IField.EMPTY_FIELD)) {
                     jfxButtons[i][k].getStyleClass().add("empty");
-                }
-                else {
+                } else {
                     jfxButtons[i][k].getStyleClass().add("player" + board[i][k]);
                 }
 
@@ -198,8 +202,7 @@ public class MainController implements Initializable {
                     // Highlight available plays
                     if (macroBoard[i][k].equals(IField.AVAILABLE_FIELD)) {
                         gridMicros[i][k].getStyleClass().add("highlight");
-                    }
-                    else {
+                    } else {
                         gridMicros[i][k].getStyleClass().removeAll("highlight");
                     }
 
@@ -214,8 +217,8 @@ public class MainController implements Initializable {
         }
 
     }
-    
-        private void setMacroWinner(int x, int y) {
+
+    private void setMacroWinner(int x, int y) {
         String[][] macroBoard = model.getMacroboard();
         Gpane.getChildren().remove(gridMicros[x][y]);
         Label lbl = new Label("");
@@ -225,6 +228,5 @@ public class MainController implements Initializable {
         gridMicros[x][y] = null;
         Gpane.add(lbl, x, y);
     }
-    
-   
+
 }

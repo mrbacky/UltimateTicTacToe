@@ -2,7 +2,7 @@
 #Mpane{
     -fx-border-color: purple;
     -fx-align-items: center;
-    -fx-background-color: lightgreen;    
+    -fx-background-color: lightblue;    
 }
 
 #Gpane{
@@ -12,7 +12,7 @@
 .button{   
     -fx-border-color: purple;
     -fx-text-align: center;
-    -fx-font-size: 30px;
+    -fx-font-size: 20px;
     -fx-border-width: 2;
     -fx-background-color:
         linear-gradient(#f2f2f2, #d6d6d6),
