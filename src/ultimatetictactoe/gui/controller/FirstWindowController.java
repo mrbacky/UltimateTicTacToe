@@ -25,6 +25,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.text.Font;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import ultimatetictactoe.bll.bot.IBot;
@@ -62,13 +63,18 @@ public class FirstWindowController implements Initializable {
     private ToggleGroup toggleLeft;
     @FXML
     private ToggleGroup toggleRight;
+    @FXML
+    private JFXButton btnPlayerRed;
+    @FXML
+    private JFXButton btnPlayerBlue;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-      
+//        Font.loadFont(getClass().getResourceAsStream("fonts/Ponderosa.ttf"), 14);
+        
         ObservableList<IBot> bots = FXCollections.observableArrayList();
         try {
             DynamicBotClassHandler.writeBotsToTextFile();
@@ -93,8 +99,7 @@ public class FirstWindowController implements Initializable {
         comboBotsLeft.setDisable(true);
         comboBotsRight.getSelectionModel().selectFirst();
         comboBotsRight.setDisable(true);
-        
-    
+
     }
 
     @FXML

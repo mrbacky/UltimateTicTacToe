@@ -1,36 +1,79 @@
 
-.root{
-    -fx-background-color: #cc00cc;
-    -fx-font-family: "ink free";
+
+
+
+@import url('https://fonts.googleapis.com/css?family=Rubik&display=swap');
+
+
+.game-font {
+    -fx-font-family: 'Rubik',  cursive;
+    -fx-font-style: normal;
+    
+    
 }
+
+
+
+.root{
+    -fx-background-color:  #0F0F0F ;/*#E76F51*/
+    /*-fx-font-family: 'Press Start 2P', cursive;*/
+    
+
+    -fx-font-style: normal;
+    -fx-font-weight: 100;
+}
+
+
 
 .button{
     -fx-padding: 5px;
     -fx-font-size: 25px;
-    -fx-font-family: "Arial";
+    
+}
+
+
+.selectors{
+    -fx-font-size: 25px;
 }
 
 .label{
 
     -fx-font-size: 25px;
     -fx-font-weight: bolder;
-    -fx-text-fill: black;
+    -fx-text-fill: white;
 }
 
 .button:hover{
-    -fx-background-color: greenyellow;
+    -fx-background-color: #B8B8D1;/*dark blue*/
+
     -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
-    -fx-text-fill: black;
+    
     -fx-font-weight: bold;
 }
 
 .button{
-    -fx-background-color: lightgreen;
-    -fx-text-fill: black;
+    -fx-background-color: #5B5F97;/*dark blue*/
+    
     -fx-font-weight: bold;
 }
 
 #lbl_title{
-    -fx-font-size: 60px;
+    -fx-font-size: 50px;
 
 }
+
+.leftAvatar{
+    -fx-background-color: #FF0F2B;
+    
+}
+
+.rightAvatar{
+    -fx-background-color: #2373CE;
+    
+}
+
+.start-players{
+    -fx-font-size: 160px;
+    -fx-alignment: center;
+}
+
